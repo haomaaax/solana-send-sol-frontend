@@ -7,7 +7,7 @@ import styles from '../styles/Home.module.css'
 
 export const SendSolForm: FC = () => {
 
-    const [ txSig, setTxSig ] = useState('');
+    const [txSig, setTxSig] = useState('');
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
     const link = () => {
@@ -35,14 +35,26 @@ export const SendSolForm: FC = () => {
 
     return (
         <div>
-            <form onSubmit={sendSol} className={styles.form}>
-                <label htmlFor="amount">Amount (in SOL) to send:</label>
-                <input id="amount" type="text" className={styles.formField} placeholder="e.g. 0.1" required />
-                <br />
-                <label htmlFor="recipient">Send SOL to:</label>
-                <input id="recipient" type="text" className={styles.formField} placeholder="e.g. 4Zw1fXuYuJhWhu9KLEYMhiPEiqcpKd6akw3WRZCv84HA" required />
-                <button type="submit" className={styles.formButton}>Send</button>
-            </form>
+            {
+                publicKey ?
+                    <form onSubmit={sendSol} className={styles.form}>
+                        <label htmlFor="amount">Amount (in SOL) to send:</label>
+                        <input id="amount" type="text" className={styles.formField} placeholder="e.g. 0.1" required />
+                        <br />
+                        <label htmlFor="recipient">Send SOL to:</label>
+                        <input id="recipient" type="text" className={styles.formField} placeholder="e.g. 4Zw1fXuYuJhWhu9KLEYMhiPEiqcpKd6akw3WRZCv84HA" required />
+                        <button type="submit" className={styles.formButton}>Send</button>
+                    </form> :
+                    <span>Connect Your Wallet</span>
+            }
+            {
+                txSig ?
+                    <div>
+                        <p>View your transaction on </p>
+                        <a href={link()}>Solana Explorer</a>
+                    </div> :
+                    null
+            }
         </div>
     )
 }
