@@ -20,7 +20,6 @@ const Home: NextPage = (props) => {
       <WalletContextProvider>
       <AppBar />
       <div className={styles.AppBody}>
-        <p>Display Wallet Balance Here</p>
         <SendSolForm />
         <BalanceDisplay />
       </div>
