@@ -22,7 +22,7 @@ export const SendSolForm: FC = () => {
 
         const sendSolInstruction = web3.SystemProgram.transfer({
             fromPubkey: publicKey,
-            toPubkey: publicKey,
+            toPubkey: recipientPubKey,
             lamports: LAMPORTS_PER_SOL * event.target.amount.value
         })
 
